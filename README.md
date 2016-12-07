@@ -23,7 +23,7 @@ It installs the following if it is not already installed:
 4. Install Maven `brew install maven`
 5. Run `./mac_install_browsers.sh`
 
-The script also runs the test.
+The script also runs the <a href="#Tests">tests</a>.
 
 ### On Windows
 
@@ -41,6 +41,8 @@ You may still need to install the Java JDK and Maven as well
     b. Chrome
     c. PhantomJS
 3. Selenium drivers for the above and the Edgedriver
+
+<a name="Tests"></a>
 
 ## Running Tests
 
