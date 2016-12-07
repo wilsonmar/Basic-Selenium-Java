@@ -11,9 +11,9 @@ Run these commands depending on your base OS.
 
 Copy this bootstrap script and run it in a Terminal shell window:
 
-   ```
+   <pre>
    sh -c "$(curl -fsSL https://raw.githubusercontent.com/wilsonmar/Basic-Selenium-Java/master/mac-bootstrap.sh)"
-   ```
+   </pre>
 
 It installs the following if it is not already installed:
 
