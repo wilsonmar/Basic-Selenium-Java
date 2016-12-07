@@ -22,6 +22,7 @@ It installs the following if it is not already installed:
 3. If you dont have the Java Development Kit (JDK) run this command `brew cask install java`
 4. Install Maven `brew install maven`
 5. Run `./mac_install_browsers.sh`
+6. Copy git-commit to .git/hooks so the test kicks off automatically on every git commit.
 
 The script also runs the <a href="#Tests">tests</a>.
 
