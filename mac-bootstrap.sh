@@ -83,6 +83,7 @@ fancy_echo "Using Git to clone from GitHub ..."
 git clone https://github.com/wilsonmar/Basic-Selenium-Java.git
 cd Basic-Selenium-Java
 
+
 fancy_echo "Copy hooks/git-commit into .git/hooks  ..."
 cp hooks/git-commit  .git/hooks
 chmod +x .git/hooks/git-commit
