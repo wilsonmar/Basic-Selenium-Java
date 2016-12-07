@@ -87,8 +87,10 @@ cd Basic-Selenium-Java
 fancy_echo "Copy hooks/git-commit into .git/hooks  ..."
 cp hooks/git-commit  .git/hooks
 chmod +x .git/hooks/git-commit
+
 cp hooks/git-push  .git/hooks
 chmod +x .git/hooks/git-push
+
 cp hooks/git-rebase  .git/hooks
 chmod +x .git/hooks/git-rebase
 
