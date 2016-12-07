@@ -1,0 +1,3 @@
+#!/bin/sh
+echo "*** git-push hook executing!"
+exit 0
