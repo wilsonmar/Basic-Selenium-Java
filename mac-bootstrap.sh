@@ -18,7 +18,8 @@ fancy_echo() { # to add blank line between echo statements:
   printf "\n$fmt\n" "$@"
 }
 
-fancy_echo "Boostrapping ..."
+CWD=`pwd`
+fancy_echo "Boostrapping $CWD ..."
 
 trap 'ret=$?; test $ret -ne 0 && printf "failed\n\n" >&2; exit $ret' EXIT
 
@@ -42,6 +43,7 @@ fi
 if ! command -v brew >/dev/null; then
   fancy_echo "Installing Homebrew..."
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" </dev/null
+  ruby --version # ruby 2.3.1p112 (2016-04-26 revision 54768) [x86_64-darwin15]
 else
   fancy_echo "Homebrew already installed. Skipping."
 fi
@@ -62,10 +64,28 @@ fi
 if ! command -v mvn >/dev/null; then
   fancy_echo "Installing Maven..."
   brew install maven
+  mvn --version  # Apache Maven 3.3.9
 else
   fancy_echo "Maven already installed. Skipping."
 fi
 
+
+if ! command -v git >/dev/null; then
+  fancy_echo "Installing Git..."
+  brew install git
+  git --version  # git version 2.10.1
+else
+  fancy_echo "Git already installed. Skipping."
+fi
+
+
+fancy_echo "Using Git to clone from GitHub ..."
+git clone https://github.com/wilsonmar/Basic-Selenium-Java.git
+
+
+fancy_echo "Copy hooks/git-commit into .git/hooks  ..."
+cp hooks/git-commit  .git/hooks
+chmod +x .git/hooks/git-commit
 
 fancy_echo "Run mac_install_browsers.sh ..."
 chmod +x mac_install_browsers.sh
