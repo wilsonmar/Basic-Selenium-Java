@@ -79,6 +79,16 @@ else
 fi
 
 
+if ! command -v git >/dev/null; then
+  fancy_echo "Installing Ruby..."
+  brew install ruby
+  ruby --version  # git version 2.10.1
+  # export PATH=/usr/local/opt/ruby/bin:$PATH
+else
+  fancy_echo "Ruby already installed. Skipping."
+fi
+
+
 fancy_echo "Using Git to clone from GitHub ..."
 git clone https://github.com/wilsonmar/Basic-Selenium-Java.git
 cd Basic-Selenium-Java
