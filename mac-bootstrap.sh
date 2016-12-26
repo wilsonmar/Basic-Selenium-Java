@@ -40,7 +40,8 @@ else
 fi
 
 
-if ! command -v brew >/dev/null; then
+which -s brew
+if [[ $? != 0 ]] ; then
   fancy_echo "Installing Homebrew..."
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" </dev/null
   ruby --version # ruby 2.3.1p112 (2016-04-26 revision 54768) [x86_64-darwin15]
@@ -49,8 +50,8 @@ else
 fi
 
 
-fancy_echo "Install Caskroom ..."
-brew tap caskroom/cask
+#fancy_echo "Install Caskroom ..."
+# brew tap caskroom/cask
 
 
 if ! command -v java >/dev/null; then
