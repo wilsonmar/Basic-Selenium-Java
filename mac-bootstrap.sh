@@ -100,10 +100,9 @@ fi
 
 if [ -d ".git" ]; then  # directory exits:
   fancy_echo "Copy hooks/git-commit into .git/hooks  ..."
-  cd .git
-  pwd
+  cp -R hooks/.  .git/hooks/
 
-  HOOK_FILE="commit-message"
+  HOOK_FILE="commit-msg"
   if [ -f "$HOOK_FILE" ]; then  # file exits:
     cp /hooks/$HOOK_FILE  .git/hooks
     chmod +x .git/hooks/$HOOK_FILE
@@ -127,14 +126,13 @@ if [ -d ".git" ]; then  # directory exits:
     chmod +x .git/hooks/$HOOK_FILE
     # these files are executed by Git when invoked by git events such as commit.
   fi
-
-  ## Got back up:
-  cd ..
-  pwd
 else
   fancy_echo ".git folder not found. This is not a Git repo! Aborting run."
-  exit
 fi
+
+ls .git/hooks
+
+exit
 
 
 DIRECTORY_UP="install-all-firefox"
