@@ -101,7 +101,6 @@ fi
 if [ -d ".git" ]; then  # directory exits:
   fancy_echo "Copy hooks/git-commit into .git/hooks  ..."
   cp -R hooks/.  .git/hooks/
-  ls .git/hooks
   
   HOOK_FILE="commit-msg"
   if [ -f "$HOOK_FILE" ]; then  # file exits:
@@ -132,8 +131,6 @@ else
 fi
 
 ls .git/hooks
-
-exit
 
 
 DIRECTORY_UP="install-all-firefox"
