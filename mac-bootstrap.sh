@@ -132,6 +132,14 @@ fi
 
 ls .git/hooks
 
+  TZ=":UTC" date +%z
+  NOW=$(date +%Y-%m-%d:%H:%M:%S%z)
+           # 2016-09-16T05:26-06:00 vs UTC
+echo "$NOW update test from $arg[0]" >README.md
+git add .
+git commit -m"Verify"
+# The message should
+
 
 DIRECTORY_UP="install-all-firefox"
 if [ ! -d "$DIRECTORY_UP" ]; then  # directory doesn't exit:
