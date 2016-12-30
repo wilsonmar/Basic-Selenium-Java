@@ -103,6 +103,12 @@ if [ -d ".git" ]; then  # directory exits:
   cd .git
   pwd
 
+  HOOK_FILE="commit-message"
+  if [ -f "$HOOK_FILE" ]; then  # file exits:
+    cp /hooks/$HOOK_FILE  .git/hooks
+    chmod +x .git/hooks/$HOOK_FILE
+  fi
+
   HOOK_FILE="git-commit"
   if [ -f "$HOOK_FILE" ]; then  # file exits:
     cp /hooks/$HOOK_FILE  .git/hooks
@@ -121,28 +127,30 @@ if [ -d ".git" ]; then  # directory exits:
     chmod +x .git/hooks/$HOOK_FILE
     # these files are executed by Git when invoked by git events such as commit.
   fi
+
+  ## Got back up:
+  cd ..
+  pwd
 else
   fancy_echo ".git folder not found. This is not a Git repo! Aborting run."
   exit
 fi
 
-#### Go up a folder:
-cd ..
-pwd
 
 DIRECTORY_UP="install-all-firefox"
 if [ ! -d "$DIRECTORY_UP" ]; then  # directory doesn't exit:
   fancy_echo "$DIRECTORY_UP being cloned..."
+  cd ..
   git clone https://github.com/omgmog/$DIRECTORY_UP.git --depth=1 && cd $DIRECTORY_UP 
   chmod +x firefoxes.sh 
   ./firefoxes.sh "current" "en-US" "no_prompt"
   # Delete all files from temporar
+
+  cd $DIRECTORY
 else
   fancy_echo "$DIRECTORY_UP already exists. Skipping..."
 fi
 
-
-cd $DIRECTORY
 ##############
 
 #HOOK_FILE="mac_install_browsers.sh" 
@@ -172,6 +180,10 @@ fi
 
 
   brew install phantomjs  
+
+fancy_echo "Run mvn install ..."
+mvn install
+
 
 pwd
 fancy_echo "Run test ..."
