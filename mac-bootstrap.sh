@@ -97,6 +97,7 @@ else
   fancy_echo "\"$DIRECTORY\" already exists. No need to clone."
 fi
 
+pwd
 
 if [ -d ".git" ]; then  # directory exits:
   fancy_echo "Copy hooks/git-commit into .git/hooks  ..."
