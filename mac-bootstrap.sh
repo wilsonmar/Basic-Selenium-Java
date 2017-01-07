@@ -128,6 +128,7 @@ if [ -d ".git" ]; then  # directory exits:
     # these files are executed by Git when invoked by git events such as commit.
   fi
 else
+  pwd
   fancy_echo ".git folder not found. This is not a Git repo! Aborting run."
 fi
 
