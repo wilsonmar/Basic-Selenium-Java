@@ -175,6 +175,7 @@ fi
 #  fancy_echo "$HOOK_FILE folder not found."
 
   # If any was already installed, install is skipped:
+  # brew link makedepend  # for geckdriver.
   brew install geckodriver
   #brew cask install firefox
   brew install chromedriver
