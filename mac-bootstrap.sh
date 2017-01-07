@@ -88,6 +88,7 @@ else
   fancy_echo "Ruby already installed. Skipping."
 fi
 
+
 DIRECTORY="Basic-Selenium-Java"
 if [ ! -d "$DIRECTORY" ]; then  # directory doesn't exit:
   fancy_echo "Using Git to clone/create \"$DIRECTORY\" from GitHub ..."
@@ -99,8 +100,6 @@ else
   fancy_echo "\"$DIRECTORY\" already exists. No need to clone."
 fi
 
-  cd $DIRECTORY
-pwd
 
 if [ -d ".git" ]; then  # directory exits:
   fancy_echo "Copy hooks/git-commit into .git/hooks  ..."
@@ -150,6 +149,8 @@ DIRECTORY_UP="install-all-firefox"
 if [ ! -d "$DIRECTORY_UP" ]; then  # directory doesn't exit:
   fancy_echo "$DIRECTORY_UP being cloned..."
   cd ..
+  pwd
+  rm -rf $DIRECTORY
   git clone https://github.com/omgmog/$DIRECTORY_UP.git --depth=1 && cd $DIRECTORY_UP 
   chmod +x firefoxes.sh 
   ./firefoxes.sh "current" "en-US" "no_prompt"
