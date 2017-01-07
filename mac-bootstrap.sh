@@ -154,7 +154,7 @@ if [ ! -d "$DIRECTORY_UP" ]; then  # directory doesn't exit:
   pwd
   git clone https://github.com/omgmog/$DIRECTORY_UP.git --depth=1 && cd $DIRECTORY_UP 
   chmod +x firefoxes.sh 
-  ./firefoxes.sh "current" "en-US" "no_prompt"
+  #./firefoxes.sh "current" "en-US" "no_prompt"
   # Delete all files from temporar
 
   cd $DIRECTORY
