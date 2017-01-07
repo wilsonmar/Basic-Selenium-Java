@@ -97,6 +97,7 @@ if [ ! -d "$DIRECTORY" ]; then  # directory doesn't exit:
   git clone https://github.com/wilsonmar/$DIRECTORY.git 
   cd $DIRECTORY 
 else
+  pwd
   cd $DIRECTORY
   fancy_echo "\"$DIRECTORY\" already exists. No need to clone."
 fi
