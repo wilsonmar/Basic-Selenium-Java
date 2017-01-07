@@ -161,6 +161,7 @@ if [ ! -d "$DIRECTORY_UP" ]; then  # directory doesn't exit:
   #cd $DIRECTORY
 else
   fancy_echo "$DIRECTORY_UP already exists. Skipping..."
+  pwd
 fi
 
 ##############
