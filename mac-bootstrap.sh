@@ -92,13 +92,14 @@ DIRECTORY="Basic-Selenium-Java"
 if [ ! -d "$DIRECTORY" ]; then  # directory doesn't exit:
   fancy_echo "Using Git to clone/create \"$DIRECTORY\" from GitHub ..."
   pwd
-  git clone https://github.com/wilsonmar/$DIRECTORY.git && cd $DIRECTORY 
+  git clone https://github.com/wilsonmar/$DIRECTORY.git 
+  cd $DIRECTORY 
 else
   cd $DIRECTORY
   fancy_echo "\"$DIRECTORY\" already exists. No need to clone."
-  pwd
 fi
 
+  cd $DIRECTORY
 pwd
 
 if [ -d ".git" ]; then  # directory exits:
