@@ -93,6 +93,7 @@ DIRECTORY="Basic-Selenium-Java"
 if [ ! -d "$DIRECTORY" ]; then  # directory doesn't exit:
   fancy_echo "Using Git to clone/create \"$DIRECTORY\" from GitHub ..."
   pwd
+  rm -rf $DIRECTORY
   git clone https://github.com/wilsonmar/$DIRECTORY.git 
   cd $DIRECTORY 
 else
@@ -150,7 +151,6 @@ if [ ! -d "$DIRECTORY_UP" ]; then  # directory doesn't exit:
   fancy_echo "$DIRECTORY_UP being cloned..."
   cd ..
   pwd
-  rm -rf $DIRECTORY
   git clone https://github.com/omgmog/$DIRECTORY_UP.git --depth=1 && cd $DIRECTORY_UP 
   chmod +x firefoxes.sh 
   ./firefoxes.sh "current" "en-US" "no_prompt"
