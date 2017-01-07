@@ -151,14 +151,14 @@ DIRECTORY_UP="install-all-firefox"
 if [ ! -d "$DIRECTORY_UP" ]; then  # directory doesn't exit:
   fancy_echo "$DIRECTORY_UP being cloned..."
   pwd
-  cd ..
+  #cd ..
   #git clone https://github.com/omgmog/$DIRECTORY_UP.git --depth=1 
   #cd $DIRECTORY_UP 
   #chmod +x firefoxes.sh 
   #./firefoxes.sh "current" "en-US" "no_prompt"
   # Delete all files from temporar
   
-  cd $DIRECTORY
+  #cd $DIRECTORY
 else
   fancy_echo "$DIRECTORY_UP already exists. Skipping..."
 fi
