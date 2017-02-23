@@ -1,0 +1,8 @@
+#!/bin/bash
+# git-commit file
+# Save this file as <git_directory>/.git/hooks/pre-commit
+
+echo "Running Git commit-msg..."
+
+# Usage example:
+# https://gerrit-review.googlesource.com/Documentation/cmd-hook-commit-msg.html

@@ -7,3 +7,4 @@ choco install firefox
 choco install googlechrome
 choco install phantomjs
 choco install selenium-all-drivers
+

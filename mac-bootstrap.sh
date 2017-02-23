@@ -40,8 +40,7 @@ else
 fi
 
 
-which -s brew
-if [[ $? != 0 ]] ; then
+if brew ls --versions myformula > /dev/null; then
   fancy_echo "Installing Homebrew..."
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" </dev/null
   ruby --version # ruby 2.3.1p112 (2016-04-26 revision 54768) [x86_64-darwin15]
@@ -90,33 +89,121 @@ else
 fi
 
 
-fancy_echo "Using Git to clone from GitHub ..."
-git clone https://github.com/wilsonmar/Basic-Selenium-Java.git
-cd Basic-Selenium-Java
+DIRECTORY="Basic-Selenium-Java"
+if [ ! -d "$DIRECTORY" ]; then  # directory doesn't exit:
+  fancy_echo "Using Git to clone/create \"$DIRECTORY\" from GitHub ..."
+  pwd
+  rm -rf $DIRECTORY
+  git clone https://github.com/wilsonmar/$DIRECTORY.git 
+  cd $DIRECTORY 
+else
+  pwd
+  cd $DIRECTORY
+  fancy_echo "\"$DIRECTORY\" already exists. No need to clone."
+fi
 
 
-fancy_echo "Copy hooks/git-commit into .git/hooks  ..."
-cp hooks/git-commit  .git/hooks
-chmod +x .git/hooks/git-commit
+if [ -d ".git" ]; then  # directory exits:
+  fancy_echo "Copy hooks/git-commit into .git/hooks  ..."
+  cp -R hooks/.  .git/hooks/
+  
+  HOOK_FILE="commit-msg"
+  if [ -f "$HOOK_FILE" ]; then  # file exits:
+    cp /hooks/$HOOK_FILE  .git/hooks
+    chmod +x .git/hooks/$HOOK_FILE
+  fi
 
-cp hooks/git-push  .git/hooks
-chmod +x .git/hooks/git-push
+  HOOK_FILE="git-commit"
+  if [ -f "$HOOK_FILE" ]; then  # file exits:
+    cp /hooks/$HOOK_FILE  .git/hooks
+    chmod +x .git/hooks/$HOOK_FILE
+  fi
 
-cp hooks/git-rebase  .git/hooks
-chmod +x .git/hooks/git-rebase
+  HOOK_FILE="git-push"
+  if [ -f "$HOOK_FILE" ]; then  # file exits:
+    cp /hooks/$HOOK_FILE  .git/hooks
+    chmod +x .git/hooks/$HOOK_FILE
+  fi
+
+  HOOK_FILE="git-rebase"
+  if [ -f "$HOOK_FILE" ]; then  # file exits:
+    cp /hooks/$HOOK_FILE  .git/hooks
+    chmod +x .git/hooks/$HOOK_FILE
+    # these files are executed by Git when invoked by git events such as commit.
+  fi
+else
+  pwd
+  fancy_echo ".git folder not found. This is not a Git repo! Aborting run."
+fi
+
+ls .git/hooks
+
+  TZ=":UTC" date +%z
+  NOW=$(date +%Y-%m-%d:%H:%M:%S%z)
+           # 2016-09-16T05:26-06:00 vs UTC
+echo "$NOW update test from $arg[0]" >README.md
+git add .
+git commit -m"Verify"
+# The message should
 
 
-fancy_echo "Run mac_install_browsers.sh ..."
-chmod +x mac_install_browsers.sh
-./mac_install_browsers.sh
+DIRECTORY_UP="install-all-firefox"
+if [ ! -d "$DIRECTORY_UP" ]; then  # directory doesn't exit:
+  fancy_echo "$DIRECTORY_UP being cloned..."
+  pwd
+  #cd ..
+  #git clone https://github.com/omgmog/$DIRECTORY_UP.git --depth=1 
+  #cd $DIRECTORY_UP 
+  #chmod +x firefoxes.sh 
+  #./firefoxes.sh "current" "en-US" "no_prompt"
+  # Delete all files from temporar
+  
+  #cd $DIRECTORY
+else
+  fancy_echo "$DIRECTORY_UP already exists. Skipping..."
+  pwd
+fi
+
+##############
+
+#HOOK_FILE="mac_install_browsers.sh" 
+#if [ -f "$HOOK_FILE" ]; then  # file exits at the root:
+  #fancy_echo "Run $HOOK_FILE to establish browser add-ins using brew ..."
+  #chmod +x $HOOK_FILE
+  # ./$HOOK_FILE
+#else
+#  fancy_echo "$HOOK_FILE folder not found."
+
+  # If any was already installed, install is skipped:
+  # brew link makedepend  # for geckdriver.
+  brew install geckodriver
+  #brew cask install firefox
+  brew install chromedriver
+  brew install phantomjs  
+#fi
+
+
+#  brew cask install google-chrome
+HOOK_FILE="/Applications/Google Chrome.app'" 
+if [ ! -f "$HOOK_FILE" ]; then  # file exits at the root:
+  fancy_echo "Installing $HOOK_FILE..."
+  brew cask install google-chrome
+else
+  fancy_echo "$HOOK_FILE exists. Skipping."
+fi
+
+
+  brew install phantomjs  
 
 
 fancy_echo "Run maven install ..."
 mvn install
 
+pwd
 
 fancy_echo "Run test ..."
 mvn test -Dsurefire.suiteXmlFiles=mac-only.xml
 # Browser windows should open and close on their own.
 
 fancy_echo "Done with status $? (0=OK)."
+# EOF #
