@@ -54,7 +54,7 @@ fi
 # brew tap caskroom/cask
 
 
-if ! command -v java >/dev/null; then
+if ! command -v javac >/dev/null; then
   fancy_echo "Installing Java..."
   brew cask install java
 else
@@ -109,6 +109,10 @@ chmod +x .git/hooks/git-rebase
 fancy_echo "Run mac_install_browsers.sh ..."
 chmod +x mac_install_browsers.sh
 ./mac_install_browsers.sh
+
+
+fancy_echo "Run maven install ..."
+mvn install
 
 
 fancy_echo "Run test ..."
